@@ -1,6 +1,15 @@
 - [词云的gitlab地址](https://github.com/amueller/word_cloud)
 - [参考文章](http://blog.csdn.net/fontthrone/article/details/72775865)
 
+
+
+![词云用到的原图片](http://upload-images.jianshu.io/upload_images/6868814-e073a23e3e0b212b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![根据词云原图片颜色渲染的图片](http://upload-images.jianshu.io/upload_images/6868814-17ac658882a7ebd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![根据系统默认设置字体颜色的图片](http://upload-images.jianshu.io/upload_images/6868814-e9f97e5380e25a01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
 基于上方的文档，做出词云的一个测试
 ```
 # -*- coding: utf-8 -*-
