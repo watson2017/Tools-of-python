@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+    environment {
+        Tool_Folder = '/home/ansible/rk-bd'
+    }
+    stages{
+        stage('hg-scm'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py keeplatest'
+                }
+            }
+        }
+
+        stage('maven'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py maven --profile=prod --pom_xml=pom.xml'
+                }
+            }
+        }
+
+        stage('rsync'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py rsync'
+                }
+            }
+        }
+
+        stage('upload'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py upload --project-server=ansible@10.116.139.116:22'
+                }
+            }
+        }
+
+        stage('backup'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py backup --project-server=ansible@10.116.139.116:22'
+                }
+            }
+        }
+
+        stage('stop-tomcat'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py stop-rk --project-server=ansible@10.116.139.116:22'
+                }
+            }
+        }
+
+        stage('deploy'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py deploy --project-server=ansible@10.116.139.116:22'
+                }
+            }
+        }
+
+        stage('start-tomcat'){
+            steps{
+                dir(env.Tool_Folder){
+                    sh './rk-bd.py start-rk --project-server=ansible@10.116.139.116:22'
+                }
+            }
+        }
+    }
+}
+
